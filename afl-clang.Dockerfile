@@ -1,15 +1,14 @@
 FROM ubuntu:xenial
 MAINTAINER Richard Johnson “rjohnson@moflow.org”
 
-# American Fuzzy Lop w/ clang support
+# American Fuzzy Lop w/ llvm support
 
 # afl-analyze  afl-clang-fast    afl-fuzz  afl-gotcpu   afl-tmin
 # afl-clang    afl-clang-fast++  afl-g++   afl-plot     afl-whatsup
 # afl-clang++  afl-cmin          afl-gcc   afl-showmap
 
 RUN apt-get -y update && \
-    apt-get -y build-dep llvm && \
-    apt-get -y install curl clang && \
+    apt-get -y install build-essential curl clang && \
 	ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config && \
 	curl -L http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz | tar zxf - && \
 	( cd afl-* && make ) && \
