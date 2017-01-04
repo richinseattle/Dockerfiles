@@ -9,13 +9,13 @@ MAINTAINER Richard Johnson “rjohnson@moflow.org”
 
 RUN apt-get -y update && \
     apt-get -y install build-essential curl clang && \
-	ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config && \
-	curl -L http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz | tar zxf - && \
-	( cd afl-* && make ) && \
-	( cd afl-*/llvm_mode && make ) && \
-	( cd afl-* && make install ) && \
-	rm -rf /afl-* && \
-	apt-get -y autoremove && \
-	rm -rf /var/lib/apt/lists/*
+    ln -s /usr/bin/llvm-config-3.8 /usr/bin/llvm-config && \
+    curl -L http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz | tar zxf - && \
+    ( cd afl-* && make ) && \
+    ( cd afl-*/llvm_mode && make ) && \
+    ( cd afl-* && make install ) && \
+    rm -rf /afl-* && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD /usr/local/bin/afl-fuzz
