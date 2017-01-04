@@ -8,8 +8,8 @@ ENV K kern
 RUN apt-get -y update && \
     apt-get -y build-dep qemu && \
     apt-get -y install build-essential curl git \
-    	libtool-bin wget automake bison \
-    	linux-image-$(uname -r) && \
+      libtool-bin wget automake bison \
+      linux-image-$(uname -r) && \
     git clone https://github.com/nccgroup/TriforceAFL.git && \
     ( cd TriforceAFL && make ) && \
     git clone https://github.com/nccgroup/TriforceLinuxSyscallFuzzer.git && \
