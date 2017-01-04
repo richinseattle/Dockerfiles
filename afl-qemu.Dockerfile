@@ -14,7 +14,6 @@ RUN apt-get -y update && \
 	( cd afl-* && make ) && \
 	( cd afl-*/qemu_mode && ./build_qemu_support.sh ) && \
 	( cd afl-* && make install ) && \
-	rm -rf /afl-* && \
 	apt-get -y autoremove && \
 	rm -rf /var/lib/apt/lists/*
 
