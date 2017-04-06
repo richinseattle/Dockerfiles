@@ -34,8 +34,19 @@ RUN apt-get -y update && \
     rm -rf /afl* && \
     rm -rf dyninst-9.2.0 && \
     apt-get -y autoremove && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* \
+    echo -ne \
+        "Usage: afl-dyninst -i <binary> -o <binary> -l <library> -e <address> -s <number>\n" \
+        "    -i: Input binary\n" \
+        "    -o: Output binary\n" \
+        "    -d: Don't instrument the binary, only supplied libraries\n" \
+        "    -l: Linked library to instrument (repeat for more than one)\n" \
+        "    -r: Runtime library to instrument (path to, repeat for more than one)\n" \
+        "    -e: Entry point address to patch (required for stripped binaries)\n" \
+        "    -s: Number of basic blocks to skip\n" \
+        "    -v: Verbose output\n" \
+        > /etc/motd
 
 ENV DYNINSTAPI_RT_LIB /usr/local/lib/libdyninstAPI_RT.so
 
-CMD /usr/local/bin/afl-fuzz
+CMD afl-dyninst
